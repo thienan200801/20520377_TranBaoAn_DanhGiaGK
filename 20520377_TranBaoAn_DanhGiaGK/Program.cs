@@ -44,29 +44,44 @@ namespace _20520377_TranBaoAn_DanhGiaGK
             load.Font = new Font("calibri", 12);
             load.Click += new EventHandler(loadFile);
 
-            Button saveBtn = new Button();
-            saveBtn.Text = "Save";
-            saveBtn.Location = new Point(300, 400);
-            saveBtn.Size = new Size(100, 30);
-            saveBtn.Font = new Font("calibri", 12);
-            saveBtn.Click += new EventHandler(saveFile);
-
             f.Size = new Size(2000, 1000);
             f.Controls.Add(load);
-            f.Controls.Add(saveBtn);
 
             Application.Run(f);
         }
 
-        private static void saveFile(object sender, EventArgs e)
+        private static async void saveFile(object sender, EventArgs e)
         {
-            StreamWriter sw = new StreamWriter("@C:\\db1.txt");
-            sw.WriteLine(saveTxt);
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "db1.txt")))
+            {
+                await outputFile.WriteAsync(saveTxt);
+            }
+
         }
 
         private static void loadFile(object sender, EventArgs e)
         {
+            TreeNode mainNode = new TreeNode
+            {
+                Name = "mainNode",
+                Text = "Main"
+            };
+            treeView1.Nodes.Add(mainNode);
 
+            TreeNode mainNode2 = new TreeNode
+            {
+                Name = "mainNode2",
+                Text = "Main2"
+            };
+            treeView1.Nodes.Add(mainNode2);
+
+            TextBox content = new TextBox();
+            content.Location = new Point(300, 300);
+            treeView1.SelectedNode.Text.ToString();
+            f.Controls.Add(content);
+
+            f.Controls.Add(treeView1);
         }
 
         private static void ThemMatHang(object sender, EventArgs e)
@@ -103,6 +118,14 @@ namespace _20520377_TranBaoAn_DanhGiaGK
 
             saveTxt += ms.Text + "|" + ten + "|" + gia;
 
+            Button saveBtn = new Button();
+            saveBtn.Text = "Save";
+            saveBtn.Location = new Point(300, 400);
+            saveBtn.Size = new Size(100, 30);
+            saveBtn.Font = new Font("calibri", 12);
+            saveBtn.Click += new EventHandler(saveFile);
+            f1.Controls.Add(saveBtn);
+
             f1.ShowDialog();
         }
 
@@ -129,6 +152,13 @@ namespace _20520377_TranBaoAn_DanhGiaGK
             f2.Controls.Add(ten);
 
             saveTxt += ms.Text + "|" + ten;
+            Button saveBtn = new Button();
+            saveBtn.Text = "Save";
+            saveBtn.Location = new Point(300, 400);
+            saveBtn.Size = new Size(100, 30);
+            saveBtn.Font = new Font("calibri", 12);
+            saveBtn.Click += new EventHandler(saveFile);
+            f2.Controls.Add(saveBtn);
 
             f2.ShowDialog();
         }
