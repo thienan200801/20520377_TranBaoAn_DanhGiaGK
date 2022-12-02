@@ -62,26 +62,7 @@ namespace _20520377_TranBaoAn_DanhGiaGK
 
         private static void loadFile(object sender, EventArgs e)
         {
-            TreeNode mainNode = new TreeNode
-            {
-                Name = "mainNode",
-                Text = "Main"
-            };
-            treeView1.Nodes.Add(mainNode);
-
-            TreeNode mainNode2 = new TreeNode
-            {
-                Name = "mainNode2",
-                Text = "Main2"
-            };
-            treeView1.Nodes.Add(mainNode2);
-
-            TextBox content = new TextBox();
-            content.Location = new Point(300, 300);
-            treeView1.SelectedNode.Text.ToString();
-            f.Controls.Add(content);
-
-            f.Controls.Add(treeView1);
+           
         }
 
         private static void ThemMatHang(object sender, EventArgs e)
