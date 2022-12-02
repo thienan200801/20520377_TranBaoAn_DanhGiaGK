@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace _20520377_TranBaoAn_DanhGiaGK
     {
         static Form f = new Form();
         static TreeView treeView1;
+        static string saveTxt = "";
+
 
         static void Main(string[] args)
         {
@@ -36,48 +39,56 @@ namespace _20520377_TranBaoAn_DanhGiaGK
 
             Button load = new Button();
             load.Text = "Load";
-            load.Location = new Point(500, 500);
-            load.Size = new Size(200, 30);
+            load.Location = new Point(100, 400);
+            load.Size = new Size(100, 30);
             load.Font = new Font("calibri", 12);
             load.Click += new EventHandler(loadFile);
 
+            Button saveBtn = new Button();
+            saveBtn.Text = "Save";
+            saveBtn.Location = new Point(300, 400);
+            saveBtn.Size = new Size(100, 30);
+            saveBtn.Font = new Font("calibri", 12);
+            saveBtn.Click += new EventHandler(saveFile);
+
             f.Size = new Size(2000, 1000);
             f.Controls.Add(load);
+            f.Controls.Add(saveBtn);
 
             Application.Run(f);
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            TreeNode tNode;
+            tNode = treeView1.Nodes.Add("Websites");
+
+            treeView1.Nodes[0].Nodes.Add("Net-informations.com");
+            treeView1.Nodes[0].Nodes[0].Nodes.Add("CLR");
+
+            treeView1.Nodes[0].Nodes.Add("Vb.net-informations.com");
+            treeView1.Nodes[0].Nodes[1].Nodes.Add("String Tutorial");
+            treeView1.Nodes[0].Nodes[1].Nodes.Add("Excel Tutorial");
+
+            treeView1.Nodes[0].Nodes.Add("Csharp.net-informations.com");
+            treeView1.Nodes[0].Nodes[2].Nodes.Add("ADO.NET");
+            treeView1.Nodes[0].Nodes[2].Nodes[0].Nodes.Add("Dataset");
+        }
+
+        private static void saveFile(object sender, EventArgs e)
+        {
+            StreamWriter sw = new StreamWriter("@C:\\db1.txt");
+            sw.WriteLine(saveTxt);
+        }
+
         private static void loadFile(object sender, EventArgs e)
         {
-            string text = System.IO.File.ReadAllText(@"C:\Users\ThienAn\OneDrive - gm.uit.edu.vn\Documents");
 
-            Console.WriteLine("Contents of WriteText.txt = {0}", text);
-            //OpenFileDialog ofd = new OpenFileDialog();
-            //if (ofd.ShowDialog() == DialogResult.OK)
-            //{
-            //    string filepath = ofd.FileName;
-            //    Console.WriteLine(filepath);
-
-            //    TreeNode tNode;
-            //    tNode = treeView1.Nodes.Add("Websites");
-
-            //    treeView1.Nodes[0].Nodes.Add("Net-informations.com");
-            //    treeView1.Nodes[0].Nodes[0].Nodes.Add("CLR");
-
-            //    treeView1.Nodes[0].Nodes.Add("Vb.net-informations.com");
-            //    treeView1.Nodes[0].Nodes[1].Nodes.Add("String Tutorial");
-            //    treeView1.Nodes[0].Nodes[1].Nodes.Add("Excel Tutorial");
-
-            //    treeView1.Nodes[0].Nodes.Add("Csharp.net-informations.com");
-            //    treeView1.Nodes[0].Nodes[2].Nodes.Add("ADO.NET");
-            //    treeView1.Nodes[0].Nodes[2].Nodes[0].Nodes.Add("Dataset");
-
-            //    f.Controls.Add(treeView1);
-            //}    
         }
 
         private static void ThemMatHang(object sender, EventArgs e)
         {
+
             Form f1 = new Form();
             f1.Size = new Size(700, 700);
             Label msLabel = new Label();
@@ -107,6 +118,8 @@ namespace _20520377_TranBaoAn_DanhGiaGK
             gia.Location = new Point(300, 300);
             f1.Controls.Add(gia);
 
+            saveTxt += ms.Text + "|" + ten + "|" + gia;
+
             f1.ShowDialog();
         }
 
@@ -131,6 +144,9 @@ namespace _20520377_TranBaoAn_DanhGiaGK
             TextBox ten = new TextBox();
             ten.Location = new Point(300, 200);
             f2.Controls.Add(ten);
+
+            saveTxt += ms.Text + "|" + ten;
+
             f2.ShowDialog();
         }
 
