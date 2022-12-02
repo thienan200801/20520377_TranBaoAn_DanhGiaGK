@@ -58,23 +58,6 @@ namespace _20520377_TranBaoAn_DanhGiaGK
             Application.Run(f);
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            TreeNode tNode;
-            tNode = treeView1.Nodes.Add("Websites");
-
-            treeView1.Nodes[0].Nodes.Add("Net-informations.com");
-            treeView1.Nodes[0].Nodes[0].Nodes.Add("CLR");
-
-            treeView1.Nodes[0].Nodes.Add("Vb.net-informations.com");
-            treeView1.Nodes[0].Nodes[1].Nodes.Add("String Tutorial");
-            treeView1.Nodes[0].Nodes[1].Nodes.Add("Excel Tutorial");
-
-            treeView1.Nodes[0].Nodes.Add("Csharp.net-informations.com");
-            treeView1.Nodes[0].Nodes[2].Nodes.Add("ADO.NET");
-            treeView1.Nodes[0].Nodes[2].Nodes[0].Nodes.Add("Dataset");
-        }
-
         private static void saveFile(object sender, EventArgs e)
         {
             StreamWriter sw = new StreamWriter("@C:\\db1.txt");
